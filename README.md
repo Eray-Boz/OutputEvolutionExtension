@@ -2,7 +2,7 @@
   <img src="icons/icon128.png" alt="OutputEvolution Logo" width="128" height="128">
 </p>
 
-<h1 align="center">OutputEvolution</h1>
+<h1 align="center">Output Evolution</h1>
 
 <p align="center">
   <strong>Transform boring ChatGPT and Gemini outputs into beautifully styled, premium-looking content.</strong>
