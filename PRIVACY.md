@@ -1,6 +1,6 @@
 # Privacy Policy for OutputEvolution
 
-**Last Updated: January 30, 2026**
+**Last Updated: February 8, 2026**
 
 ## Overview
 
@@ -33,7 +33,7 @@ OutputEvolution is a browser extension that enhances the visual appearance of Ch
 
 OutputEvolution does not use any third-party analytics, tracking, or data collection services.
 
-The only external resource loaded is **Google Fonts** (Quicksand and JetBrains Mono) for typography.
+The Quicksand font is loaded from **Google Fonts** only within the extension's own popup window. No external resources are loaded on ChatGPT or Gemini pages.
 
 ## Data Security
 

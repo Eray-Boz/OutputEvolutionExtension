@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "OutputEvolution",
-  "version": "1.0.0",
+  "name": "Output Evolution",
+  "version": "1.0.1",
   "description": "Transform boring ChatGPT and Gemini outputs into beautifully styled, premium-looking content.",
   "author": "Eray Boz",
   "icons": {

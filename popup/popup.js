@@ -1,9 +1,10 @@
 /**
  * OutputEvolution - Popup Controller
- * Handles user interface interactions and settings management
- * 
- * @version 1.0.0
- * @author OutputEvolution
+ * Handles user interface interactions and settings management.
+ *
+ * @version 1.0.1
+ * @author Eray Boz
+ * @license MIT
  */
 
 document.addEventListener('DOMContentLoaded', () => {

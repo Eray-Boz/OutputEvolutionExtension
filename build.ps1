@@ -7,8 +7,8 @@
     Excludes development files and includes only necessary extension files.
     
 .NOTES
-    Author: OutputEvolution
-    Version: 1.0.0
+    Author: Eray Boz
+    Version: 1.0.1
 #>
 
 # Configuration

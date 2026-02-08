@@ -1,9 +1,10 @@
 /**
  * OutputEvolution - Popup Styles
- * Modern dark theme with gradient accents
- * 
- * @version 1.0.0
- * @author OutputEvolution
+ * Modern dark theme with gradient accents.
+ *
+ * @version 1.0.1
+ * @author Eray Boz
+ * @license MIT
  */
 
 /* ============================================
@@ -14,14 +15,12 @@
   /* Primary Colors */
   --primary: #6366F1;
   --primary-light: #818CF8;
-  --primary-dark: #4F46E5;
   --secondary: #8B5CF6;
 
   /* Background Colors */
   --bg-primary: #0F0F14;
   --bg-secondary: #1A1A24;
   --bg-tertiary: #252532;
-  --bg-hover: #2D2D3D;
 
   /* Text Colors */
   --text-primary: #F9FAFB;
@@ -34,7 +33,6 @@
 
   /* Shadows */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
 
   /* Border Radius */
   --radius-sm: 6px;

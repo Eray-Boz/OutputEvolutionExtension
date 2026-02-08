@@ -1,25 +1,29 @@
 /**
- * OutputEvolution - ChatGPT & Gemini Style Enhancement Extension
- * Transforms AI outputs into beautifully styled content
- * 
- * @version 1.0.0
- * @author OutputEvolution
+ * OutputEvolution - Content Style Injector
+ * Transforms AI chat outputs into beautifully styled, premium-looking content.
+ *
+ * @version 1.0.1
+ * @author Eray Boz
+ * @license MIT
  */
 
 (function () {
   'use strict';
 
-  // ============================================
+  // ============================================================
   // THEME CONFIGURATION
-  // ============================================
+  // ============================================================
 
+  /**
+   * Available color themes with gradient palettes.
+   * Each theme defines primary/secondary colors, gradients, borders,
+   * glows, heading styles, and table header styles.
+   */
   const THEMES = {
     blue: {
       primary: '#3B82F6',
       primaryLight: '#60A5FA',
-      primaryDark: '#2563EB',
       secondary: '#6366F1',
-      accent: '#8B5CF6',
       gradient: 'linear-gradient(135deg, #3B82F6 0%, #6366F1 100%)',
       gradientSubtle: 'linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(99, 102, 241, 0.08) 100%)',
       border: 'rgba(59, 130, 246, 0.25)',
@@ -32,9 +36,7 @@
     green: {
       primary: '#22C55E',
       primaryLight: '#4ADE80',
-      primaryDark: '#16A34A',
       secondary: '#10B981',
-      accent: '#059669',
       gradient: 'linear-gradient(135deg, #22C55E 0%, #10B981 100%)',
       gradientSubtle: 'linear-gradient(135deg, rgba(34, 197, 94, 0.08) 0%, rgba(16, 185, 129, 0.08) 100%)',
       border: 'rgba(34, 197, 94, 0.25)',
@@ -47,9 +49,7 @@
     red: {
       primary: '#EF4444',
       primaryLight: '#F87171',
-      primaryDark: '#DC2626',
       secondary: '#F87171',
-      accent: '#FCA5A5',
       gradient: 'linear-gradient(135deg, #EF4444 0%, #F87171 100%)',
       gradientSubtle: 'linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(248, 113, 113, 0.08) 100%)',
       border: 'rgba(239, 68, 68, 0.25)',
@@ -62,9 +62,7 @@
     yellow: {
       primary: '#EAB308',
       primaryLight: '#FDE047',
-      primaryDark: '#CA8A04',
       secondary: '#FACC15',
-      accent: '#FDE047',
       gradient: 'linear-gradient(135deg, #EAB308 0%, #FACC15 100%)',
       gradientSubtle: 'linear-gradient(135deg, rgba(234, 179, 8, 0.08) 0%, rgba(250, 204, 21, 0.08) 100%)',
       border: 'rgba(234, 179, 8, 0.25)',
@@ -77,9 +75,7 @@
     turquoise: {
       primary: '#14B8A6',
       primaryLight: '#2DD4BF',
-      primaryDark: '#0D9488',
       secondary: '#06B6D4',
-      accent: '#22D3EE',
       gradient: 'linear-gradient(135deg, #14B8A6 0%, #06B6D4 100%)',
       gradientSubtle: 'linear-gradient(135deg, rgba(20, 184, 166, 0.08) 0%, rgba(6, 182, 212, 0.08) 100%)',
       border: 'rgba(20, 184, 166, 0.25)',
@@ -92,9 +88,7 @@
     navy: {
       primary: '#1E40AF',
       primaryLight: '#3B82F6',
-      primaryDark: '#1E3A8A',
       secondary: '#2563EB',
-      accent: '#60A5FA',
       gradient: 'linear-gradient(135deg, #1E40AF 0%, #2563EB 100%)',
       gradientSubtle: 'linear-gradient(135deg, rgba(30, 64, 175, 0.08) 0%, rgba(37, 99, 235, 0.08) 100%)',
       border: 'rgba(30, 64, 175, 0.25)',
@@ -107,9 +101,7 @@
     orange: {
       primary: '#F97316',
       primaryLight: '#FB923C',
-      primaryDark: '#EA580C',
       secondary: '#FB923C',
-      accent: '#FDBA74',
       gradient: 'linear-gradient(135deg, #F97316 0%, #FB923C 100%)',
       gradientSubtle: 'linear-gradient(135deg, rgba(249, 115, 22, 0.08) 0%, rgba(251, 146, 60, 0.08) 100%)',
       border: 'rgba(249, 115, 22, 0.25)',
@@ -122,9 +114,7 @@
     pink: {
       primary: '#EC4899',
       primaryLight: '#F472B6',
-      primaryDark: '#DB2777',
       secondary: '#F472B6',
-      accent: '#F9A8D4',
       gradient: 'linear-gradient(135deg, #EC4899 0%, #F472B6 100%)',
       gradientSubtle: 'linear-gradient(135deg, rgba(236, 72, 153, 0.08) 0%, rgba(244, 114, 182, 0.08) 100%)',
       border: 'rgba(236, 72, 153, 0.25)',
@@ -137,9 +127,7 @@
     purple: {
       primary: '#A855F7',
       primaryLight: '#C084FC',
-      primaryDark: '#9333EA',
       secondary: '#C084FC',
-      accent: '#E9D5FF',
       gradient: 'linear-gradient(135deg, #A855F7 0%, #C084FC 100%)',
       gradientSubtle: 'linear-gradient(135deg, rgba(168, 85, 247, 0.08) 0%, rgba(192, 132, 252, 0.08) 100%)',
       border: 'rgba(168, 85, 247, 0.25)',
@@ -152,9 +140,7 @@
     brown: {
       primary: '#92400E',
       primaryLight: '#B45309',
-      primaryDark: '#78350F',
       secondary: '#B45309',
-      accent: '#D97706',
       gradient: 'linear-gradient(135deg, #92400E 0%, #B45309 100%)',
       gradientSubtle: 'linear-gradient(135deg, rgba(146, 64, 14, 0.08) 0%, rgba(180, 83, 9, 0.08) 100%)',
       border: 'rgba(146, 64, 14, 0.25)',
@@ -166,23 +152,24 @@
     }
   };
 
-  // Intensity presets for style variations
+  /** Style intensity presets controlling border, shadow, and animation strength */
   const INTENSITY = {
     1: { borderWidth: '1px', shadowSize: '4px', borderRadius: '6px', transform: 'none' },
     2: { borderWidth: '2px', shadowSize: '8px', borderRadius: '10px', transform: 'translateY(-1px)' },
     3: { borderWidth: '3px', shadowSize: '12px', borderRadius: '14px', transform: 'translateY(-2px)' }
   };
 
-  // ============================================
+  // ============================================================
   // PLATFORM DETECTION & SELECTORS
-  // ============================================
+  // ============================================================
 
   /**
-   * Supported platforms configuration
-   * @type {Object}
+   * Supported platform configurations.
+   * Each platform defines host patterns for detection and CSS selectors
+   * for targeting AI response content areas.
    */
   const PLATFORMS = {
-      chatgpt: {
+    chatgpt: {
       hostPatterns: ['chat.openai.com', 'chatgpt.com'],
       selectors: {
         container: '[data-message-author-role="assistant"]',
@@ -194,11 +181,10 @@
         links: '.markdown a',
         headings: '.markdown h1, .markdown h2, .markdown h3, .markdown h4, .markdown h5, .markdown h6'
       }
-      },
-      gemini: {
+    },
+    gemini: {
       hostPatterns: ['gemini.google.com'],
       selectors: {
-        // Target only message content area, NOT the response-container-header (contains Gemini logo)
         container: 'message-content',
         content: '.markdown-main-panel',
         lists: '.markdown-main-panel ul, .markdown-main-panel ol, message-content ul, message-content ol',
@@ -212,34 +198,34 @@
   };
 
   /**
-   * Detects current platform based on hostname
-   * @returns {string} Platform identifier ('chatgpt' | 'gemini')
+   * Detects the current platform based on hostname.
+   * @returns {'chatgpt'|'gemini'} Platform identifier
    */
   function detectPlatform() {
     const hostname = window.location.hostname;
-    
+
     for (const [platform, config] of Object.entries(PLATFORMS)) {
       if (config.hostPatterns.some(pattern => hostname.includes(pattern))) {
         return platform;
       }
     }
-    
-    return 'chatgpt'; // Default fallback
+
+    return 'chatgpt';
   }
 
   /**
-   * Gets selectors for current platform
-   * @returns {Object} Platform-specific selectors
+   * Returns CSS selectors for the current platform.
+   * @returns {Object} Platform-specific CSS selectors
    */
   function getSelectors() {
     const platform = detectPlatform();
     return PLATFORMS[platform]?.selectors || PLATFORMS.chatgpt.selectors;
   }
 
-  // Current platform selectors (resolved at runtime)
-  let SELECTORS = getSelectors();
+  // ============================================================
+  // DEFAULT SETTINGS
+  // ============================================================
 
-  // Default settings
   const DEFAULT_SETTINGS = {
     enabled: true,
     theme: 'blue',
@@ -255,38 +241,45 @@
     }
   };
 
-  // ============================================
+  // ============================================================
   // STATE MANAGEMENT
-  // ============================================
-  
+  // ============================================================
+
   let currentSettings = null;
   let styleElement = null;
   let observer = null;
+  const SELECTORS = getSelectors();
 
-  // ============================================
+  // ============================================================
   // UTILITY FUNCTIONS
-  // ============================================
+  // ============================================================
 
   /**
-   * Converts hex color to RGB format
-   * @param {string} hex - Hex color code
-   * @returns {string} RGB values as comma-separated string
+   * Converts a hex color string to a comma-separated RGB triplet.
+   * @param {string} hex - Hex color code (e.g. '#3B82F6')
+   * @returns {string} RGB values (e.g. '59, 130, 246')
    */
   function hexToRgb(hex) {
-    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result
-      ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}`
+    const match = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return match
+      ? `${parseInt(match[1], 16)}, ${parseInt(match[2], 16)}, ${parseInt(match[3], 16)}`
       : '99, 102, 241';
   }
 
-  // ============================================
+  // ============================================================
   // STYLE GENERATION
-  // ============================================
+  // ============================================================
 
   /**
-   * Generates CSS styles based on current settings
-   * @param {Object} settings - User settings object
-   * @returns {string} Generated CSS string
+   * Generates the complete CSS stylesheet based on user settings.
+   *
+   * NOTE: Google Fonts (Quicksand, JetBrains Mono) are NOT loaded via
+   * @import because target sites' Content Security Policy blocks external
+   * stylesheets. Font references are kept with system-font fallbacks so
+   * users with locally installed fonts still benefit.
+   *
+   * @param {Object} settings - User preferences
+   * @returns {string} Complete CSS string
    */
   function generateStyles(settings) {
     if (!settings.enabled) return '';
@@ -298,18 +291,11 @@
     const containerSelector = sel.container;
     const isGemini = platform === 'gemini';
 
-    let css = `
-      @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
-      
-      .oe-styled {
-        font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-      }
-    `;
+    let css = '';
 
-    // Gemini-specific base selectors (target only content area, not header with logo)
+    // Gemini: Prevent header area (with Gemini logo) from being styled
     if (isGemini) {
       css += `
-        /* Gemini: Ensure header with logo is NOT styled */
         .response-container-header {
           background: none !important;
           border: none !important;
@@ -318,7 +304,9 @@
       `;
     }
 
-    // Lists styling
+    // ----------------------------------------------------------
+    // LISTS
+    // ----------------------------------------------------------
     if (settings.elements.lists) {
       css += `
         ${sel.lists},
@@ -339,7 +327,7 @@
           box-sizing: border-box !important;
           display: block !important;
         }
-        
+
         ${sel.lists}:hover,
         ${containerSelector} ${sel.content} ul:hover,
         ${containerSelector} ${sel.content} ol:hover {
@@ -347,7 +335,7 @@
           box-shadow: 0 ${parseInt(intensity.shadowSize) + 4}px ${parseInt(intensity.shadowSize) * 3}px ${theme.glow} !important;
           border-color: ${theme.primary} !important;
         }
-        
+
         ${sel.lists} li,
         ${containerSelector} ${sel.content} ul li,
         ${containerSelector} ${sel.content} ol li {
@@ -363,31 +351,31 @@
           box-sizing: border-box !important;
           display: list-item !important;
         }
-        
+
         ${sel.lists} li:last-child,
         ${containerSelector} ${sel.content} ul li:last-child,
         ${containerSelector} ${sel.content} ol li:last-child {
           border-bottom: none !important;
         }
-        
+
         ${sel.lists} li:hover,
         ${containerSelector} ${sel.content} ul li:hover,
         ${containerSelector} ${sel.content} ol li:hover {
           padding-left: 4px !important;
         }
-        
+
         ${sel.lists} li::marker,
         ${containerSelector} ${sel.content} ul li::marker,
         ${containerSelector} ${sel.content} ol li::marker {
           color: ${theme.primary} !important;
           font-weight: 600 !important;
         }
-        
+
         .markdown ul,
         ${containerSelector} ${sel.content} ul {
           list-style: none !important;
         }
-        
+
         .markdown ul li::before,
         ${containerSelector} ${sel.content} ul li::before {
           content: '' !important;
@@ -401,14 +389,14 @@
           border-radius: 50% !important;
           opacity: 0.8 !important;
         }
-        
+
         ${sel.lists} li *,
         ${containerSelector} ${sel.content} ul li *,
         ${containerSelector} ${sel.content} ol li * {
           color: inherit !important;
         }
       `;
-      
+
       // Gemini-specific list selectors
       if (isGemini) {
         css += `
@@ -419,78 +407,78 @@
           .response-content ol,
           .model-response-text ul,
           .model-response-text ol {
-          background: ${theme.gradientSubtle} !important;
-          border: ${intensity.borderWidth} solid ${theme.border} !important;
-          border-radius: ${intensity.borderRadius} !important;
-          padding: 16px 20px 16px 40px !important;
-          margin: 16px 0 !important;
-          box-shadow: 0 ${intensity.shadowSize} ${parseInt(intensity.shadowSize) * 2}px ${theme.glow} !important;
-          position: relative !important;
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-          overflow-x: auto !important;
-          overflow-y: visible !important;
-          list-style-position: outside !important;
-          max-width: 100% !important;
-          box-sizing: border-box !important;
+            background: ${theme.gradientSubtle} !important;
+            border: ${intensity.borderWidth} solid ${theme.border} !important;
+            border-radius: ${intensity.borderRadius} !important;
+            padding: 16px 20px 16px 40px !important;
+            margin: 16px 0 !important;
+            box-shadow: 0 ${intensity.shadowSize} ${parseInt(intensity.shadowSize) * 2}px ${theme.glow} !important;
+            position: relative !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            overflow-x: auto !important;
+            overflow-y: visible !important;
+            list-style-position: outside !important;
+            max-width: 100% !important;
+            box-sizing: border-box !important;
           }
-          
+
           model-response ul:hover,
           model-response ol:hover,
           .response-content ul:hover,
           .response-content ol:hover {
-          transform: ${intensity.transform} !important;
-          box-shadow: 0 ${parseInt(intensity.shadowSize) + 4}px ${parseInt(intensity.shadowSize) * 3}px ${theme.glow} !important;
-          border-color: ${theme.primary} !important;
-        }
-        
+            transform: ${intensity.transform} !important;
+            box-shadow: 0 ${parseInt(intensity.shadowSize) + 4}px ${parseInt(intensity.shadowSize) * 3}px ${theme.glow} !important;
+            border-color: ${theme.primary} !important;
+          }
+
           model-response li,
           .response-content li,
           .model-response-text li {
-          color: inherit !important;
+            color: inherit !important;
             padding: 8px 0 !important;
             margin: 0 !important;
-          border-bottom: 1px solid ${theme.border} !important;
-          position: relative !important;
-          transition: all 0.2s ease !important;
-          overflow-wrap: break-word !important;
-          word-break: break-word !important;
-          max-width: 100% !important;
-          box-sizing: border-box !important;
-          display: list-item !important;
-        }
-        
+            border-bottom: 1px solid ${theme.border} !important;
+            position: relative !important;
+            transition: all 0.2s ease !important;
+            overflow-wrap: break-word !important;
+            word-break: break-word !important;
+            max-width: 100% !important;
+            box-sizing: border-box !important;
+            display: list-item !important;
+          }
+
           model-response li:last-child,
           .response-content li:last-child,
           .model-response-text li:last-child {
-          border-bottom: none !important;
-        }
-        
+            border-bottom: none !important;
+          }
+
           model-response li:hover,
           .response-content li:hover {
-          padding-left: 4px !important;
-        }
-        
+            padding-left: 4px !important;
+          }
+
           model-response li::marker,
           .response-content li::marker {
-          color: ${theme.primary} !important;
-          font-weight: 600 !important;
-        }
-        
+            color: ${theme.primary} !important;
+            font-weight: 600 !important;
+          }
+
           model-response ul li::before,
           .response-content ul li::before,
           .markdown-main-panel ul li::before {
-          content: '' !important;
-          position: absolute !important;
-          left: -24px !important;
-          top: 50% !important;
-          transform: translateY(-50%) !important;
-          width: 8px !important;
-          height: 8px !important;
-          background: ${theme.gradient} !important;
-          border-radius: 50% !important;
-          opacity: 0.8 !important;
-        }
-        
+            content: '' !important;
+            position: absolute !important;
+            left: -24px !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+            width: 8px !important;
+            height: 8px !important;
+            background: ${theme.gradient} !important;
+            border-radius: 50% !important;
+            opacity: 0.8 !important;
+          }
+
           /* Gemini: Prevent nested list double-styling */
           model-response ul ul,
           model-response ol ol,
@@ -510,7 +498,9 @@
       }
     }
 
-    // Tables styling
+    // ----------------------------------------------------------
+    // TABLES
+    // ----------------------------------------------------------
     if (settings.elements.tables) {
       css += `
         ${sel.tables} {
@@ -524,11 +514,11 @@
           box-shadow: 0 ${intensity.shadowSize} ${parseInt(intensity.shadowSize) * 2}px ${theme.glow} !important;
           background: ${theme.gradientSubtle} !important;
         }
-        
+
         ${sel.tables} thead {
           background: ${theme.tableHeaderBg} !important;
         }
-        
+
         ${sel.tables} th {
           padding: 14px 18px !important;
           text-align: left !important;
@@ -539,22 +529,22 @@
           color: ${theme.tableHeaderText} !important;
           border: none !important;
         }
-        
+
         ${sel.tables} td {
           color: inherit !important;
           padding: 14px 18px !important;
           border-bottom: 1px solid ${theme.border} !important;
           transition: all 0.2s ease !important;
         }
-        
+
         ${sel.tables} tr:last-child td {
           border-bottom: none !important;
         }
-        
+
         ${sel.tables} tbody tr:hover {
           background: rgba(${hexToRgb(theme.primary)}, 0.08) !important;
         }
-        
+
         ${sel.tables} tbody tr:hover td:first-child {
           border-left: 3px solid ${theme.primary} !important;
           padding-left: 15px !important;
@@ -563,64 +553,66 @@
 
       // Gemini-specific table selectors
       if (isGemini) {
-      css += `
+        css += `
           /* Gemini: Additional table selectors */
           model-response table,
           .response-content table,
           .model-response-text table {
-          width: 100% !important;
-          border-collapse: separate !important;
-          border-spacing: 0 !important;
-          border: ${intensity.borderWidth} solid ${theme.border} !important;
-          border-radius: ${intensity.borderRadius} !important;
-          overflow: hidden !important;
-          margin: 20px 0 !important;
-          box-shadow: 0 ${intensity.shadowSize} ${parseInt(intensity.shadowSize) * 2}px ${theme.glow} !important;
-          background: ${theme.gradientSubtle} !important;
-        }
-        
+            width: 100% !important;
+            border-collapse: separate !important;
+            border-spacing: 0 !important;
+            border: ${intensity.borderWidth} solid ${theme.border} !important;
+            border-radius: ${intensity.borderRadius} !important;
+            overflow: hidden !important;
+            margin: 20px 0 !important;
+            box-shadow: 0 ${intensity.shadowSize} ${parseInt(intensity.shadowSize) * 2}px ${theme.glow} !important;
+            background: ${theme.gradientSubtle} !important;
+          }
+
           model-response thead,
           .response-content thead,
           .model-response-text thead {
             background: ${theme.tableHeaderBg} !important;
           }
-          
+
           model-response th,
           .response-content th,
           .model-response-text th {
-          padding: 14px 18px !important;
-          text-align: left !important;
-          font-weight: 600 !important;
-          font-size: 13px !important;
-          text-transform: uppercase !important;
-          letter-spacing: 0.05em !important;
+            padding: 14px 18px !important;
+            text-align: left !important;
+            font-weight: 600 !important;
+            font-size: 13px !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.05em !important;
             color: ${theme.tableHeaderText} !important;
-          border: none !important;
-        }
-        
+            border: none !important;
+          }
+
           model-response td,
           .response-content td,
           .model-response-text td {
-          color: inherit !important;
-          padding: 14px 18px !important;
-          border-bottom: 1px solid ${theme.border} !important;
-          transition: all 0.2s ease !important;
-        }
-        
+            color: inherit !important;
+            padding: 14px 18px !important;
+            border-bottom: 1px solid ${theme.border} !important;
+            transition: all 0.2s ease !important;
+          }
+
           model-response tr:last-child td,
           .response-content tr:last-child td {
-          border-bottom: none !important;
-        }
-        
+            border-bottom: none !important;
+          }
+
           model-response tbody tr:hover,
           .response-content tbody tr:hover {
-          background: rgba(${hexToRgb(theme.primary)}, 0.08) !important;
-        }
-      `;
+            background: rgba(${hexToRgb(theme.primary)}, 0.08) !important;
+          }
+        `;
       }
     }
 
-    // Code blocks styling
+    // ----------------------------------------------------------
+    // CODE BLOCKS
+    // ----------------------------------------------------------
     if (settings.elements.code) {
       css += `
         .markdown pre {
@@ -637,7 +629,7 @@
                       inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
           position: relative !important;
         }
-        
+
         .markdown pre::before {
           content: 'CODE' !important;
           display: block !important;
@@ -651,7 +643,7 @@
           border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
           text-transform: uppercase !important;
         }
-        
+
         .markdown pre code {
           background: transparent !important;
           padding: 20px !important;
@@ -660,7 +652,7 @@
           overflow-x: auto !important;
           color: inherit !important;
         }
-        
+
         .markdown code {
           background: rgba(${hexToRgb(theme.primary)}, 0.15) !important;
           color: ${theme.primaryLight} !important;
@@ -693,7 +685,7 @@
                         inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
             position: relative !important;
           }
-          
+
           model-response pre::before,
           .response-content pre::before,
           .markdown-main-panel pre::before {
@@ -709,7 +701,7 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
             text-transform: uppercase !important;
           }
-          
+
           model-response pre code,
           .response-content pre code,
           .markdown-main-panel pre code {
@@ -720,7 +712,7 @@
             overflow-x: auto !important;
             color: inherit !important;
           }
-          
+
           model-response code,
           .response-content code,
           .markdown-main-panel code,
@@ -733,7 +725,7 @@
             font-size: 0.9em !important;
             border: 1px solid ${theme.border} !important;
           }
-          
+
           /* Reset inline code inside pre blocks */
           model-response pre code,
           .response-content pre code,
@@ -746,7 +738,9 @@
       }
     }
 
-    // Blockquotes styling
+    // ----------------------------------------------------------
+    // BLOCKQUOTES
+    // ----------------------------------------------------------
     if (settings.elements.quotes) {
       css += `
         ${sel.blockquotes} {
@@ -761,19 +755,19 @@
           box-shadow: 0 ${intensity.shadowSize} ${parseInt(intensity.shadowSize) * 2}px ${theme.glow} !important;
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
         }
-        
+
         ${sel.blockquotes}::before,
         ${sel.blockquotes}::after {
           display: none !important;
           content: none !important;
         }
-        
+
         ${sel.blockquotes}:hover {
           transform: ${intensity.transform} !important;
           border-color: ${theme.primaryLight} !important;
           box-shadow: 0 ${parseInt(intensity.shadowSize) + 4}px ${parseInt(intensity.shadowSize) * 3}px ${theme.glow} !important;
         }
-        
+
         ${sel.blockquotes} p {
           margin: 0 !important;
         }
@@ -800,7 +794,7 @@
             display: block !important;
             visibility: visible !important;
           }
-          
+
           model-response blockquote:hover,
           .response-content blockquote:hover,
           .markdown-main-panel blockquote:hover {
@@ -808,7 +802,7 @@
             border-color: ${theme.primaryLight} !important;
             box-shadow: 0 ${parseInt(intensity.shadowSize) + 4}px ${parseInt(intensity.shadowSize) * 3}px ${theme.glow} !important;
           }
-          
+
           /* Gemini: Ensure blockquote content is visible */
           model-response blockquote p,
           .response-content blockquote p,
@@ -820,14 +814,14 @@
             padding: 0 !important;
             color: inherit !important;
           }
-          
+
           model-response blockquote p:last-child,
           .response-content blockquote p:last-child,
           .markdown-main-panel blockquote p:last-child,
           .model-response-text blockquote p:last-child {
             margin-bottom: 0 !important;
           }
-          
+
           model-response blockquote b,
           model-response blockquote strong,
           .response-content blockquote b,
@@ -840,7 +834,7 @@
             display: inline !important;
             color: ${theme.primary} !important;
           }
-          
+
           /* Ensure all blockquote text content is visible */
           model-response blockquote *,
           .response-content blockquote *,
@@ -852,7 +846,9 @@
       }
     }
 
-    // Links styling
+    // ----------------------------------------------------------
+    // LINKS
+    // ----------------------------------------------------------
     if (settings.elements.links) {
       css += `
         ${sel.links} {
@@ -866,7 +862,7 @@
           -webkit-text-fill-color: transparent !important;
           background-clip: text !important;
         }
-        
+
         ${sel.links}::after {
           content: '' !important;
           position: absolute !important;
@@ -878,11 +874,11 @@
           transition: width 0.3s ease !important;
           border-radius: 2px !important;
         }
-        
+
         ${sel.links}:hover::after {
           width: 100% !important;
         }
-        
+
         ${sel.links}:hover {
           filter: brightness(1.2) !important;
         }
@@ -906,7 +902,7 @@
             -webkit-text-fill-color: transparent !important;
             background-clip: text !important;
           }
-          
+
           model-response a::after,
           .response-content a::after,
           .markdown-main-panel a::after {
@@ -920,13 +916,13 @@
             transition: width 0.3s ease !important;
             border-radius: 2px !important;
           }
-          
+
           model-response a:hover::after,
           .response-content a:hover::after,
           .markdown-main-panel a:hover::after {
             width: 100% !important;
           }
-          
+
           model-response a:hover,
           .response-content a:hover,
           .markdown-main-panel a:hover {
@@ -936,7 +932,9 @@
       }
     }
 
-    // Headings styling
+    // ----------------------------------------------------------
+    // HEADINGS
+    // ----------------------------------------------------------
     if (settings.elements.headings) {
       css += `
         ${sel.headings},
@@ -960,7 +958,7 @@
           box-shadow: 0 ${intensity.shadowSize} ${parseInt(intensity.shadowSize) * 2}px ${theme.glow} !important;
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
         }
-        
+
         ${sel.headings}:hover,
         ${containerSelector} ${sel.content} h1:hover,
         ${containerSelector} ${sel.content} h2:hover,
@@ -972,19 +970,19 @@
           box-shadow: 0 ${parseInt(intensity.shadowSize) + 4}px ${parseInt(intensity.shadowSize) * 3}px ${theme.glow} !important;
           border-color: ${theme.primaryLight} !important;
         }
-        
+
         .markdown h1, ${containerSelector} ${sel.content} h1 {
           font-size: 1.6em !important;
         }
-        
+
         .markdown h2, ${containerSelector} ${sel.content} h2 {
           font-size: 1.4em !important;
         }
-        
+
         .markdown h3, ${containerSelector} ${sel.content} h3 {
           font-size: 1.25em !important;
         }
-        
+
         .markdown h4, .markdown h5, .markdown h6,
         ${containerSelector} ${sel.content} h4,
         ${containerSelector} ${sel.content} h5,
@@ -1035,7 +1033,7 @@
             box-shadow: 0 ${intensity.shadowSize} ${parseInt(intensity.shadowSize) * 2}px ${theme.glow} !important;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
           }
-          
+
           model-response h1:hover,
           model-response h2:hover,
           model-response h3:hover,
@@ -1049,25 +1047,25 @@
             box-shadow: 0 ${parseInt(intensity.shadowSize) + 4}px ${parseInt(intensity.shadowSize) * 3}px ${theme.glow} !important;
             border-color: ${theme.primaryLight} !important;
           }
-          
+
           model-response h1,
           .response-content h1,
           .markdown-main-panel h1 {
             font-size: 1.6em !important;
           }
-          
+
           model-response h2,
           .response-content h2,
           .markdown-main-panel h2 {
             font-size: 1.4em !important;
           }
-          
+
           model-response h3,
           .response-content h3,
           .markdown-main-panel h3 {
             font-size: 1.25em !important;
           }
-          
+
           model-response h4,
           model-response h5,
           model-response h6,
@@ -1083,7 +1081,9 @@
       }
     }
 
-    // Math formulas styling (KaTeX/MathJax)
+    // ----------------------------------------------------------
+    // MATH FORMULAS (KaTeX / MathJax)
+    // ----------------------------------------------------------
     if (settings.elements.formulas) {
       css += `
         /* Display (block) math formulas */
@@ -1102,7 +1102,7 @@
           box-shadow: 0 ${intensity.shadowSize} ${parseInt(intensity.shadowSize) * 2}px ${theme.glow} !important;
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
         }
-        
+
         .katex-display:hover,
         .MathJax_Display:hover,
         .mjx-container[jax="CHTML"][display="true"]:hover,
@@ -1113,8 +1113,8 @@
           border-right-color: ${theme.primaryLight} !important;
           box-shadow: 0 ${parseInt(intensity.shadowSize) + 4}px ${parseInt(intensity.shadowSize) * 3}px ${theme.glow} !important;
         }
-        
-        /* Reset inner elements inside display math - prevent double box */
+
+        /* Reset inner elements inside display math to prevent double box */
         .katex-display > .katex,
         .katex-display .katex-html,
         .MathJax_Display > .MathJax,
@@ -1127,17 +1127,17 @@
           box-shadow: none !important;
           border-radius: 0 !important;
         }
-        
-        /* Formula text color */
+
+        /* Formula text color — inherits from parent for readability */
         .katex,
         .katex *,
         .MathJax,
         .MathJax *,
         mjx-container,
         mjx-container * {
-          color: ${theme.primaryLight} !important;
+          color: inherit !important;
         }
-        
+
         /* Inline math formulas */
         .katex:not(.katex-display .katex),
         span.MathJax:not(.MathJax_Display .MathJax),
@@ -1170,7 +1170,7 @@
             box-shadow: 0 ${intensity.shadowSize} ${parseInt(intensity.shadowSize) * 2}px ${theme.glow} !important;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
           }
-          
+
           model-response .katex-display:hover,
           .response-content .katex-display:hover,
           .markdown-main-panel .katex-display:hover {
@@ -1187,13 +1187,14 @@
     return css;
   }
 
-  // ============================================
+  // ============================================================
   // DOM MANIPULATION
-  // ============================================
+  // ============================================================
 
   /**
-   * Injects generated styles into the page
-   * @param {Object} settings - User settings object
+   * Injects the generated stylesheet into the page.
+   * Removes any previously injected stylesheet first.
+   * @param {Object} settings - User preferences
    */
   function injectStyles(settings) {
     if (styleElement) {
@@ -1210,7 +1211,8 @@
   }
 
   /**
-   * Initializes MutationObserver for dynamic content
+   * Initializes a MutationObserver to re-inject styles when
+   * dynamic content is added to the page (e.g. new AI responses).
    */
   function initializeObserver() {
     if (observer) {
@@ -1229,13 +1231,13 @@
     });
   }
 
-  // ============================================
+  // ============================================================
   // SETTINGS MANAGEMENT
-  // ============================================
+  // ============================================================
 
   /**
-   * Loads settings from Chrome storage
-   * @returns {Promise<Object>} Settings object
+   * Loads user settings from Chrome storage.
+   * @returns {Promise<Object>} Resolved settings object
    */
   function loadSettings() {
     return new Promise((resolve) => {
@@ -1245,30 +1247,30 @@
     });
   }
 
-  // ============================================
+  // ============================================================
   // MESSAGE HANDLING
-  // ============================================
+  // ============================================================
 
+  /**
+   * Listens for messages from the popup script to update styles
+   * in real time when the user changes settings.
+   */
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.type === 'SETTINGS_UPDATED') {
       currentSettings = message.settings;
       injectStyles(currentSettings);
       sendResponse({ success: true });
-    } else if (message.type === 'REFRESH_STYLES') {
-      if (currentSettings) {
-        injectStyles(currentSettings);
-      }
-      sendResponse({ success: true });
     }
     return true;
   });
 
-  // ============================================
+  // ============================================================
   // INITIALIZATION
-  // ============================================
+  // ============================================================
 
   /**
-   * Initializes the extension
+   * Bootstraps the extension: loads settings, injects styles,
+   * and starts the mutation observer.
    */
   async function init() {
     currentSettings = await loadSettings();
@@ -1276,7 +1278,6 @@
     initializeObserver();
   }
 
-  // Start initialization
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {

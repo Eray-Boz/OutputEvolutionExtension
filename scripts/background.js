@@ -1,9 +1,10 @@
 /**
  * OutputEvolution - Background Service Worker
- * Handles extension installation and settings initialization
- * 
- * @version 1.0.0
- * @author OutputEvolution
+ * Handles extension installation and default settings initialization.
+ *
+ * @version 1.0.1
+ * @author Eray Boz
+ * @license MIT
  */
 
 // Default settings configuration

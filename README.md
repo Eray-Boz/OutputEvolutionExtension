@@ -9,9 +9,9 @@
 </p>
 
 <p align="center">
-  <a href="https://chrome.google.com/webstore"><img src="https://img.shields.io/badge/Chrome%20Web%20Store-Install-green?logo=googlechrome" alt="Chrome Web Store"></a>
+  <a href="https://chromewebstore.google.com/detail/maeeijbcnhibkajeeopcipkaflhejajk"><img src="https://img.shields.io/badge/Chrome%20Web%20Store-Install-green?logo=googlechrome" alt="Chrome Web Store"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a>
-  <img src="https://img.shields.io/badge/version-1.0.0-orange.svg" alt="Version">
+  <img src="https://img.shields.io/badge/version-1.0.1-orange.svg" alt="Version">
 </p>
 
 ---
@@ -61,7 +61,7 @@ Choose from 10 vibrant color themes:
 ## 📦 Installation
 
 ### Option 1: Chrome Web Store (Recommended)
-1. Visit the [Chrome Web Store page](#) *(link will be available after publishing)*
+1. Visit the [Chrome Web Store page](https://chromewebstore.google.com/detail/maeeijbcnhibkajeeopcipkaflhejajk)
 2. Click **"Add to Chrome"**
 3. Done! Visit ChatGPT or Gemini to see the magic ✨
 
@@ -86,6 +86,13 @@ Choose from 10 vibrant color themes:
 ---
 
 ## 📝 Changelog
+
+### v1.0.1 (2026-02-08)
+- 🔧 Fixed CSP error caused by external Google Fonts import on ChatGPT
+- 🔧 Fixed formula text color now properly inherits from page theme
+- 🧹 Removed unused code (dead CSS class, obsolete message handler)
+- 💅 Cleaned up and standardized code formatting across all files
+- 📝 Updated documentation and file headers
 
 ### v1.0.0 (2026-01-30)
 - 🎉 Initial release
