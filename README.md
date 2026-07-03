@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="icons/icon128.png" alt="OutputEvolution Logo" width="128" height="128">
+  <img src="public/icons/icon128.png" alt="OutputEvolution Logo" width="128" height="128">
 </p>
 
 <h1 align="center">Output Evolution</h1>
@@ -11,7 +11,7 @@
 <p align="center">
   <a href="https://chromewebstore.google.com/detail/maeeijbcnhibkajeeopcipkaflhejajk"><img src="https://img.shields.io/badge/Chrome%20Web%20Store-Install-green?logo=googlechrome" alt="Chrome Web Store"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a>
-  <img src="https://img.shields.io/badge/version-1.0.1-orange.svg" alt="Version">
+  <img src="https://img.shields.io/badge/version-1.1.0-orange.svg" alt="Version">
 </p>
 
 ---
@@ -39,21 +39,21 @@ Choose from 10 vibrant color themes:
 | Theme | Description |
 |-------|-------------|
 | 🔵 **Blue** | Classic vibrant blue |
-| 🟢 **Green** | Fresh natural green |
-| 🔴 **Red** | Bold passionate red |
 | 🟡 **Yellow** | Bright energetic yellow |
+| 🔴 **Red** | Bold passionate red |
+| 🟢 **Green** | Fresh natural green |
+| 🟠 **Orange** | Warm vibrant orange |
+| 🟣 **Purple** | Rich royal purple |
 | 🪿 **Turquoise** | Modern cyan-teal |
 | 🔷 **Navy** | Deep professional blue |
-| 🟠 **Orange** | Warm vibrant orange |
 | 🌸 **Pink** | Elegant rose pink |
-| 🟣 **Purple** | Rich royal purple |
 | 🟤 **Brown** | Warm earthy brown |
 
 ---
 
 ## 🌐 Supported Platforms
 
-- ✅ [ChatGPT](https://chat.openai.com) / [chatgpt.com](https://chatgpt.com)
+- ✅ [ChatGPT](https://chatgpt.com) / [chat.openai.com](https://chat.openai.com)
 - ✅ [Google Gemini](https://gemini.google.com)
 
 ---
@@ -67,11 +67,12 @@ Choose from 10 vibrant color themes:
 
 ### Option 2: Developer Mode (Manual Installation)
 1. Download or clone this repository
-2. Open Chrome and go to `chrome://extensions/`
-3. Enable **"Developer mode"** (top-right toggle)
-4. Click **"Load unpacked"**
-5. Select the `OutputEvolutionExtension` folder
-6. Done! The extension icon will appear in your toolbar
+2. Run `npm install` and `npm run build` to generate the production-ready build
+3. Open Chrome and go to `chrome://extensions/`
+4. Enable **"Developer mode"** (top-right toggle)
+5. Click **"Load unpacked"**
+6. Select the `dist` folder generated inside `OutputEvolutionExtension`
+7. Done! The extension icon will appear in your toolbar
 
 ---
 
@@ -87,37 +88,57 @@ Choose from 10 vibrant color themes:
 
 ## 📝 Changelog
 
+### v1.1.0 (2026-07-02)
+- ⚛️ Complete project rewrite using **React 18** and **TypeScript** for robust type safety and clean architecture.
+- 🎨 Modernized extension popup layout using **Tailwind CSS**, adding beautiful micro-animations and active states.
+- ⚙️ Switched build pipeline to **Vite** and **esbuild** for compilation, minification, and packaging.
+- 📦 Standardized build scripts and direct packaging of `OutputEvolution.zip` using Node.js.
+
 ### v1.0.1 (2026-02-08)
-- 🔧 Fixed CSP error caused by external Google Fonts import on ChatGPT
-- 🔧 Fixed formula text color now properly inherits from page theme
-- 🧹 Removed unused code (dead CSS class, obsolete message handler)
-- 💅 Cleaned up and standardized code formatting across all files
-- 📝 Updated documentation and file headers
+- 🔧 Fixed CSP error caused by external Google Fonts import on ChatGPT.
+- 🔧 Fixed formula text color now properly inherits from page theme.
+- 🧹 Removed unused code (dead CSS class, obsolete message handler).
+- 💅 Cleaned up and standardized code formatting across all files.
+- 📝 Updated documentation and file headers.
 
 ### v1.0.0 (2026-01-30)
-- 🎉 Initial release
-- 10 vibrant color themes
-- ChatGPT and Gemini support
-- 7 styled elements (Lists, Tables, Code, Quotes, Links, Headings, Formulas)
-- 3 intensity levels (Subtle, Balanced, Bold)
-- Quicksand font for modern typography
-- Math formula styling with dual borders
-- Premium code block styling
+- 🎉 Initial release.
+- 10 vibrant color themes.
+- ChatGPT and Gemini support.
+- 7 styled elements (Lists, Tables, Code, Quotes, Links, Headings, Formulas).
+- 3 intensity levels (Subtle, Balanced, Bold).
+- Quicksand font for modern typography.
+- Math formula styling with dual borders.
+- Premium code block styling.
 
 ---
 
 ## 🛠️ Development
 
 ### Prerequisites
+- Node.js (v18+)
 - Google Chrome or any Chromium-based browser
-- PowerShell (for build script)
 
 ### Local Development
-1. Clone the repository
-2. Make your changes
-3. Go to `chrome://extensions/`
-4. Click **"Reload"** on the OutputEvolution card
-5. Test your changes on ChatGPT or Gemini
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Eray-Boz/OutputEvolutionExtension.git
+   cd OutputEvolutionExtension
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Run the development server or build the files:
+   ```bash
+   # Build once for popup, content, and background scripts
+   npm run build
+   
+   # Clean build artifacts
+   npm run clean
+   ```
+4. Load the `dist` folder into Chrome via `chrome://extensions/` (Load Unpacked).
+5. Reload the extension whenever you make edits and rebuild the project.
 
 ---
 
@@ -130,7 +151,6 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## 👨‍💻 Author
 
 **Eray Boz**
-
 
 ---
 

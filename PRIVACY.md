@@ -1,6 +1,6 @@
 # Privacy Policy for OutputEvolution
 
-**Last Updated: February 8, 2026**
+**Last Updated: July 2, 2026**
 
 ## Overview
 
